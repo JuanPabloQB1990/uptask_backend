@@ -8,10 +8,10 @@ const router = Router()
 router.post("/create-account", 
     body("name")
         .notEmpty()
-        .withMessage("Nombre es requerido"),
+        .withMessage("El Nombre es requerido"),
     body("email")
         .isEmail()
-        .withMessage("Email no valido"),
+        .withMessage("El Email no valido"),
     body("password")
         .isLength({ min: 8 })
         .withMessage("Password requiere minimo 8 caracteres"),
@@ -22,6 +22,34 @@ router.post("/create-account",
         return true;
     }),
     handleInputErrors,
-    AuthController.createAccount)
+    AuthController.createAccount
+)
+
+router.post("/confirm-account", 
+    body("token")
+        .notEmpty()
+        .withMessage("El Token es requerido"),
+    handleInputErrors,
+    AuthController.confirmAccount
+)
+
+router.post("/login", 
+    body("email")
+        .isEmail()
+        .withMessage("El Email no valido"),
+    body("password")
+        .isLength({ min: 8 })
+        .withMessage("Password requiere minimo 8 caracteres"),
+    handleInputErrors,
+    AuthController.login
+)
+
+router.post("/request-code", 
+    body("email")
+        .isEmail()
+        .withMessage("El Email no valido"),
+    handleInputErrors,
+    AuthController.requestCodeConfirmationAccount
+)
 
 export default router
