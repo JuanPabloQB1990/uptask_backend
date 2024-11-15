@@ -147,5 +147,80 @@ export class AuthController {
             res.status(500).json({ error:error.message });
         }
     }
+    static forgotPassword = async(req: Request, res: Response) => {
+        try {
+            const { email } = req.body
+            
+            // check if user already exists by email
+            const userExists = await User.findOne({email})
+            
+            if (!userExists) {
+                const error = new Error("Este usuario no esta registrado")
+                res.status(404).json({error : error.message})
+                return 
+            }
+
+            // generate token
+            const token = new Token()
+            token.token = generateToken()
+            token.user = userExists.id
+            await token.save()
+            
+            // send email confirmation
+            AuthEmail.sendPasswordResetToken({
+                    email : userExists.email,
+                    name: userExists.name,
+                    token: token.token
+            })
+
+
+            res.json({message: "Reviza tu email para instrucciones"})
+
+        } catch (error) {
+            res.status(500).json({ error:error.message });
+        }
+    }
+
+    static validateToken = async(req: Request, res: Response) => {
+        try {
+            const { token } = req.body
+            const tokenExists = await Token.findOne({token})
+            
+            if (!tokenExists){
+                const error = new Error("Token no válido")
+                res.status(401).json({error : error.message})
+                return
+            }
+
+            res.json({message: "Token válido, Define tu nuevo password"})
+        } catch (error) {
+            res.status(500).json({ error:error.message });
+        }
+    }
+
+    static updatePassword = async(req: Request, res: Response) => {
+        try {
+            const { token } = req.params
+            const { password } = req.body
+            const tokenExists = await Token.findOne({token})
+            
+            if (!tokenExists){
+                const error = new Error("Token no válido")
+                res.status(401).json({error : error.message})
+                return
+            }
+
+            const user = await User.findById(tokenExists.user)
+            
+            // hash password
+            user!.password = await hashPassword(password)
+
+            await Promise.allSettled([user?.save(), tokenExists.deleteOne()])
+
+            res.json({message: "Password restablecida satisfactoriamente"})
+        } catch (error) {
+            res.status(500).json({ error:error.message });
+        }
+    }
 }
 
