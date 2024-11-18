@@ -8,6 +8,7 @@ import { generateJWT } from "../utils/jwt";
 
 
 export class AuthController {
+
     static createAccount = async(req: Request, res: Response) => {
         try {
             const { password, email } = req.body
@@ -222,6 +223,14 @@ export class AuthController {
             await Promise.allSettled([user?.save(), tokenExists.deleteOne()])
 
             res.json({message: "Password restablecida satisfactoriamente"})
+        } catch (error) {
+            res.status(500).json({ error:error.message });
+        }
+    }
+
+    static user = async(req: Request, res: Response) => {
+        try {
+            res.json(req.user)
         } catch (error) {
             res.status(500).json({ error:error.message });
         }
