@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express"
+import type { NextFunction, Request, Response } from "express"
 import User, { IUser } from "../models/User";
 import jwt from "jsonwebtoken"
 
@@ -10,7 +10,7 @@ declare global {
     }
 }
 
-export const authenticate = async(req: Request, res: Response, next: NextFunction) => {
+export const authenticate = async(req: Request, res: Response, next: NextFunction) : Promise<any> => {
 
     const bearer = req.headers.authorization
 
@@ -29,7 +29,7 @@ export const authenticate = async(req: Request, res: Response, next: NextFunctio
             
             if (user) {
                 req.user = user
-                
+                next()
             } else {
                 res.status(500).json({ error: "Token no Valido" })
                 
@@ -39,5 +39,4 @@ export const authenticate = async(req: Request, res: Response, next: NextFunctio
     } catch (error) {
         res.status(500).json({ error: "Token no Valido" })
     }
-    next()
 }
