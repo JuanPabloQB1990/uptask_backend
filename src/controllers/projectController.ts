@@ -18,10 +18,17 @@ export class ProjectController {
             
         }
     }
+
     static getAllProjects = async (req: Request, res: Response) => {
 
         try {
-            const projects = await Project.find({manager: req.user.id})
+            const projects = await Project.find({
+                $or : [
+                    {manager: req.user.id},
+                    {team: {$in: req.user.id}}
+
+                ]
+            })
             res.json(projects)
         } catch (error) {
             console.log(error);
@@ -43,7 +50,7 @@ export class ProjectController {
                 return
             }
             
-            if(project.manager!.toString() !== req.user.id.toString()) {
+            if(project.manager!.toString() !== req.user.id.toString() && !project.team.includes(req.user.id)) {
                 const error = new Error("No tienes permisos para ver este proyecto")
                 res.status(403).json({error : error.message});
                 return

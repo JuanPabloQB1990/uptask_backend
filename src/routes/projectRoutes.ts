@@ -4,7 +4,7 @@ import { body, param } from "express-validator"
 import { handleInputErrors } from "../middleware/validation"
 import { TaskController } from "../controllers/taskController"
 import { validateProjectsExists } from "../middleware/projects"
-import { taskBelongToProject, validateTasksExists } from "../middleware/tasks"
+import { hasAuthorization, taskBelongToProject, validateTasksExists } from "../middleware/tasks"
 import { authenticate } from "../middleware/auth"
 import { TeamMemberController } from "../controllers/teamController"
 
@@ -64,6 +64,7 @@ router.delete("/:id",
 router.param("projectId", validateProjectsExists)
 router.post("/:projectId/tasks", 
     //validateProjectsExists,
+    hasAuthorization,
     param("projectId")
         .isMongoId()
         .withMessage("Id no valido"),
@@ -107,6 +108,7 @@ router.put("/:projectId/tasks/:taskId",
     //validateProjectsExists,
     //validateTasksExists,
     //taskBelongToProject,
+    hasAuthorization,
     param("taskId")
         .isMongoId()
         .withMessage("Id no valido"),
@@ -127,6 +129,7 @@ router.delete("/:projectId/tasks/:taskId",
     //validateProjectsExists,
     //validateTasksExists,
     //taskBelongToProject,
+    hasAuthorization,
     param("taskId")
         .isMongoId()
         .withMessage("Id no valido"),
