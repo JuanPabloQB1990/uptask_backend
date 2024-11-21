@@ -7,6 +7,7 @@ import { validateProjectsExists } from "../middleware/projects"
 import { hasAuthorization, taskBelongToProject, validateTasksExists } from "../middleware/tasks"
 import { authenticate } from "../middleware/auth"
 import { TeamMemberController } from "../controllers/teamController"
+import { NoteController } from "../controllers/noteController"
 
 const router = Router()
 
@@ -90,6 +91,7 @@ router.get("/:projectId/tasks",
 
 router.param("taskId", validateTasksExists)
 router.param("taskId", taskBelongToProject)
+
 router.get("/:projectId/tasks/:taskId", 
     //validateProjectsExists,
     //validateTasksExists,
@@ -157,6 +159,7 @@ router.post("/:projectId/tasks/:taskId/status",
     TaskController.updateStatusTaskById
 )
 
+/// Route for team
 router.post("/:projectId/team/find",
     body("email")
         .isEmail()
@@ -183,6 +186,29 @@ router.delete("/:projectId/team/:userId",
         .withMessage("El id es invalido"),
     handleInputErrors,
     TeamMemberController.removeMemberById
+)
+
+/** Routes for notes */
+
+router.post("/:projectId/tasks/:taskId/notes", 
+    body("content")
+        .notEmpty()
+        .withMessage("El contenido es obligatorio"),
+    handleInputErrors,
+    NoteController.createNote
+)
+
+router.get("/:projectId/tasks/:taskId/notes", 
+    handleInputErrors,
+    NoteController.getTaskNotes
+)
+
+router.delete("/:projectId/tasks/:taskId/notes/:noteId", 
+    param("noteId")
+        .isMongoId()
+        .withMessage("El id es invalido"),
+    handleInputErrors,
+    NoteController.deleteNoteById
 )
 
 
