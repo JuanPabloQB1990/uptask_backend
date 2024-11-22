@@ -1,4 +1,4 @@
-import { Response, Request} from "express"
+import type { Request, Response} from "express"
 import Note, { INote } from "../models/Note"
 import { Types } from "mongoose"
 
@@ -39,8 +39,8 @@ export class NoteController {
         }
     }
 
-    static deleteNoteById = async(req: Request<NoteParams>, res: Response) => {
-
+    static deleteNoteById = async(req: Request, res: Response) => {
+        
         const { noteId } = req.params
         try {
             const note = await Note.findById(noteId)

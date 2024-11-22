@@ -235,5 +235,66 @@ export class AuthController {
             res.status(500).json({ error:error.message });
         }
     }
+
+    static updateProfile = async(req: Request, res: Response) => {
+        const { name, email } = req.body
+
+        const userExists = await User.findOne({email})
+
+        if (userExists && userExists.id.toString() !== req.user.id.toString()) {
+            const error = new Error("Email ya registrado")
+            res.status(409).json({error : error.message})
+            return 
+        }
+
+        req.user.name = name
+        req.user.email = email
+
+        try {
+            await req.user.save()
+            res.json({message: "Perfil Actualizado"})
+        } catch (error) {
+            res.status(500).json({ error:error.message });
+        }
+    }
+
+    static updateCurrentPassword = async(req: Request, res: Response) => {
+        const { current_password, password } = req.body
+        
+        const user = await User.findById(req.user.id)
+        
+        const isPasswordCorrect = await checkPassword(current_password, user!.password)
+        
+        if (!isPasswordCorrect) {
+            const error = new Error("La contraseña actual es incorrecta")
+            res.status(401).json({error : error.message})
+            return
+        }
+
+        user!.password = await hashPassword(password)
+
+        try {
+            await user!.save()
+            res.json({message: "Contraseña Actualizada"})
+        } catch (error) {
+            res.status(500).json({ error:error.message });
+        }
+    }
+
+    static checkPassword = async(req: Request, res: Response) => {
+        const { password } = req.body
+        
+        const user = await User.findById(req.user.id)
+        
+        const isPasswordCorrect = await checkPassword(password, user!.password)
+        
+        if (!isPasswordCorrect) {
+            const error = new Error("La contraseña es incorrecta")
+            res.status(401).json({error : error.message})
+            return
+        }
+
+        res.json({message: "Contraseña Correcta"})
+    }
 }
 

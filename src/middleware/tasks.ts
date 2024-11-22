@@ -1,10 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import Task, { ITask } from "../models/Task";
+import { IProject } from "../models/Project";
+import { IUser } from "../models/User";
 
 declare global {
     namespace Express {
         interface Request {
-            task: ITask
+            task: ITask,
+            project: IProject,
+            user: IUser
         }
     }
 }
