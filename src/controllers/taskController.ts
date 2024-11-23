@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import Task from "../models/Task";
+import Note from "../models/Note";
 
 export class TaskController {
 
@@ -58,6 +59,7 @@ export class TaskController {
     static deleteTaskById = async (req: Request, res: Response) => {
         
         try {
+            
             req.project.tasks = req.project.tasks.filter(task => task?.toString() !== req.task.id.toString())
             await Promise.allSettled([req.task.deleteOne(), req.project.save()])
             

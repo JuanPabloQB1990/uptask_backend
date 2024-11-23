@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import Project from "../models/Project";
 import Task from "../models/Task";
+import Note from "../models/Note";
 
 export class ProjectController {
 
@@ -14,8 +15,7 @@ export class ProjectController {
             res.json({message:"Proyecto creado Correctamente"})
             
         } catch (error) {
-            console.log(error);
-            
+            res.status(500).json({ error: "Hubo un error"})
         }
     }
 
@@ -31,8 +31,7 @@ export class ProjectController {
             })
             res.json(projects)
         } catch (error) {
-            console.log(error);
-            
+            res.status(500).json({ error: "Hubo un error"})
         }
         
     }
@@ -43,7 +42,7 @@ export class ProjectController {
 
         try {
             const project = await Project.findById(id).populate("tasks")
-            
+           
             if (!project) {
                 const error = new Error("Proyecto no encontrado")
                 res.status(404).json({error : error.message});
@@ -59,69 +58,33 @@ export class ProjectController {
             res.json(project)
 
         } catch (error) {
-            console.log(error);
-            
+            res.status(500).json({ error: "Hubo un error"})
         }
     }
 
     static updateProjectById = async (req: Request, res: Response): Promise<void> => {
 
-        const { id } = req.params
-
         try {
-            const project = await Project.findById(id)
-            if (!project) {
-                const error = new Error("Proyecto no encontrado")
-                res.status(404).json({error : error.message});
-                return
-            }
-
-            if(project.manager!.toString() !== req.user.id.toString()) {
-                const error = new Error("No tienes permisos para modificar este proyecto")
-                res.status(403).json({error : error.message});
-                return
-            }
-
-            project.clientName = req.body.clientName
-            project.projectName = req.body.projectName
-            project.description = req.body.description
-            project.save()
+            req.project.clientName = req.body.clientName
+            req.project.projectName = req.body.projectName
+            req.project.description = req.body.description
+            req.project.save()
             res.json({message:"Proyecto Actualizado"})
 
         } catch (error) {
-            console.log(error);
-            
+            res.status(500).json({ error: "Hubo un error"})
         }
     }
 
     static deleteProjectById = async (req: Request, res: Response): Promise<void> => {
 
-        const { id } = req.params
-
         try {
-            const project = await Project.findById(id)
+            await req.project.deleteOne()
             
-            
-            if (!project) {
-                const error = new Error("Proyecto no encontrado")
-                res.status(404).json({error : error.message});
-                return
-            }
-
-            if(project.manager!.toString() !== req.user.id.toString()) {
-                const error = new Error("No tienes permisos para eliminar este proyecto")
-                res.status(403).json({error : error.message});
-                return
-            }
-
-            await Task.deleteMany({project: id})
-                
-            await project.deleteOne()
             res.json({message:"Proyecto Eliminado"})
 
         } catch (error) {
-            console.log(error);
-            
+            res.status(500).json({ error: "Hubo un error"})
         }
     }
 

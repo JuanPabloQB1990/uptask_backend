@@ -23,6 +23,7 @@ export const authenticate = async(req: Request, res: Response, next: NextFunctio
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!)
+        
         if (typeof decoded === "object" && decoded.id) {
 
             const user = await User.findById(decoded.id).select("_id name email")
@@ -31,12 +32,11 @@ export const authenticate = async(req: Request, res: Response, next: NextFunctio
                 req.user = user
                 next()
             } else {
-                res.status(500).json({ error: "Token no Valido" })
-                
+                res.status(401).json({ error: "Token no Valido" })
             }
         }
         
     } catch (error) {
-        res.status(500).json({ error: "Token no Valido" })
+        res.status(401).json({ error: "Token no Valido" })
     }
 }
