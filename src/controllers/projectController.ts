@@ -12,10 +12,13 @@ export class ProjectController {
 
         try {
             await project.save()
-            res.json({message:"Proyecto creado Correctamente"})
+            res.status(201).json({message:"Proyecto creado"})
+            console.log(res);
             
         } catch (error) {
-            res.status(500).json({ error: "Hubo un error"})
+            //res.status(500).json({ error: "Hubo un error"})
+            console.error("Error creando el proyecto:", error);
+            res.status(500).json({ message: "Error creating project", error: error.message });
         }
     }
 

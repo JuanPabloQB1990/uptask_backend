@@ -38,6 +38,7 @@ router.get("/:id",
 )
 
 router.param("projectId", validateProjectsExists)
+
 router.put("/:projectId",
     param("projectId")
         .isMongoId()

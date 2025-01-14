@@ -28,5 +28,4 @@ server.use(express.json())
 server.use("/api/auth", authRoutes)
 server.use("/api/projects", proyectRoutes)
 
-
 export default server
