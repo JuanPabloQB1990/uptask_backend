@@ -13,7 +13,6 @@ export class ProjectController {
         try {
             await project.save()
             res.status(201).json({message:"Proyecto creado"})
-            console.log(res);
             
         } catch (error) {
             //res.status(500).json({ error: "Hubo un error"})
@@ -31,7 +30,8 @@ export class ProjectController {
                     {team: {$in: req.user.id}}
 
                 ]
-            })
+            }).populate({ path: "team", select: "_id"})
+           
             res.json(projects)
         } catch (error) {
             res.status(500).json({ error: "Hubo un error"})
@@ -44,15 +44,15 @@ export class ProjectController {
         const { id } = req.params
 
         try {
-            const project = await Project.findById(id).populate("tasks")
-           
+            const project = await Project.findById(id).populate("tasks").populate({ path: "team", select: "_id"})
+
             if (!project) {
                 const error = new Error("Proyecto no encontrado")
                 res.status(404).json({error : error.message});
                 return
             }
             
-            if(project.manager!.toString() !== req.user.id.toString() && !project.team.includes(req.user.id)) {
+            if(project.manager!.toString() !== req.user.id.toString() && !project.team.some(member => member._id.equals(req.user.id))) {
                 const error = new Error("No tienes permisos para ver este proyecto")
                 res.status(403).json({error : error.message});
                 return

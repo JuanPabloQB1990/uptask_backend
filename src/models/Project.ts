@@ -4,6 +4,7 @@ import { IUser } from "./User"
 import Note from "./Note"
 
 export interface IProject extends Document {
+    _id: string,
     projectName: string
     clientName: string
     description: string

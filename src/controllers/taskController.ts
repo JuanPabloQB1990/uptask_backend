@@ -12,7 +12,14 @@ export class TaskController {
             
             req.project.tasks.push(task.id)
             await Promise.allSettled([task.save(), req.project.save()])
-            res.json({message: "Tarea creada"})
+            
+            const taskResponse = {
+                _id: task._id,
+                name: task.name,
+                description: task.description,
+                status: task.status
+            }
+            res.json({taskResponse, message: "Tarea creada"})
         } catch (error) {
             res.status(500).json({error: "Hubo un error"})
             

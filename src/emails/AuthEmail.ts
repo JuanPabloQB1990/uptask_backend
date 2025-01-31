@@ -28,7 +28,7 @@ export class AuthEmail {
             </div>`,
     });
 
-    console.log("Mensaje Enviado", info.messageId);
+    //console.log("Mensaje Enviado", info.messageId);
   };
 
   static sendPasswordResetToken = async (user: IEmail) => {
@@ -52,6 +52,6 @@ export class AuthEmail {
             </div>`,
     });
 
-    console.log("Mensaje Enviado", info.messageId);
+    //console.log("Mensaje Enviado", info.messageId);
   };
 }

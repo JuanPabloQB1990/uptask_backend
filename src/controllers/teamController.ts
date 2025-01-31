@@ -5,8 +5,6 @@ import Project from "../models/Project";
 export class TeamMemberController {
 
     static getProjectMembers = async(req: Request, res: Response) => {
-        console.log(req.project);
-        
         
         const project = await Project.findById(req.project.id).populate({
             path: 'team',

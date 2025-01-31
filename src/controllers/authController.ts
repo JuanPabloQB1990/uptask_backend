@@ -10,6 +10,7 @@ import { generateJWT } from "../utils/jwt";
 export class AuthController {
 
     static createAccount = async(req: Request, res: Response) => {
+        
         try {
             const { password, email } = req.body
             
@@ -40,8 +41,8 @@ export class AuthController {
             })
 
             await Promise.allSettled([user.save(), token.save()])
-
-            res.json({message: "cuenta creada, reviza tu email para verificarla"})
+            
+            res.status(201).json({message: "cuenta creada, reviza tu email para verificarla"})
         } catch (error) {
             res.status(500).json({ error:error.message });
         }

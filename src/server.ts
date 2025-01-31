@@ -8,16 +8,19 @@ import { corsConfig } from "./config/cors"
 import morgan from "morgan"
 import cookieParser from 'cookie-parser';
 
+
 dotenv.config()
 
-connectDB()
 // inicializa el servidor
 const server = express()
 
-server.use(cookieParser());
+if (process.env.NODE_ENV !== 'test') {
+    connectDB()
+    // configuracion de cors
+    server.use(cors(corsConfig))
+}
 
-// configuracion de cors
-server.use(cors(corsConfig))
+server.use(cookieParser());
 
 // logging
 server.use(morgan("dev"))
@@ -29,3 +32,4 @@ server.use("/api/auth", authRoutes)
 server.use("/api/projects", proyectRoutes)
 
 export default server
+
