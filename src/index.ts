@@ -37,6 +37,13 @@ io.on("connection", (socket) => {
         socket.to(project).emit("edited task", task)
     })
 
+    socket.on("update status task", (task) => {
+        console.log(task);
+        
+        const project = task.project
+        socket.to(project).emit("updated status task", task)
+    })
+
     socket.on("open task", (task) => {
         socket.join(task)
     })
