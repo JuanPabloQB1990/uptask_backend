@@ -16,8 +16,6 @@ const io = new Server(httpServer, {
 })
 
 io.on("connection", (socket) => {
-    console.log(colors.green.bold("Conectado a socket.io"));
-
     socket.on("open project", (project) => {
         socket.join(project)
     })
@@ -38,8 +36,6 @@ io.on("connection", (socket) => {
     })
 
     socket.on("update status task", (task) => {
-        console.log(task);
-        
         const project = task.project
         socket.to(project).emit("updated status task", task)
     })
