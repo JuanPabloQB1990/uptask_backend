@@ -50,11 +50,12 @@ Antes de instalar, asegúrate de tener instalado:
 
 -- En la configuracion del sandbox creado dar click en el piñon de configuracion y copia y pega en las variables de entorno correspondientes las credenciales: 
 
-   - SMTP_HOST=sandbox.smtp.mailtrap.io
-   - SMTP_PORT=your_port
-   - SMTP_USER=your_user
-   - SMTP_PASS=your_password
-
+```js
+SMTP_HOST=sandbox.smtp.mailtrap.io
+SMTP_PORT=your_port
+SMTP_USER=your_user
+SMTP_PASS=your_password
+```
    
 🛠️ Instalación
 
