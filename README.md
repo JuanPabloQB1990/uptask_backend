@@ -65,25 +65,33 @@ Esta API está construida con:
 
 2. Instala dependencias
 
-   - cd uptask_backend
-   - npm install
+```js
+cd uptask_backend
+```
 
-3. Crea un archivo .env 
+```js
+npm install
+```
+
+3. Crea un archivo .env en la carpeta raiz del proyecto.
 
 4. Ajusta tus variables de entorno:
 
-   - PORT=5000
-   - DATABASE_URL=mongodb://localhost:27017/uptask
-   - FRONTEND_URL=http://localhost:5173
-   - JWT_SECRET=tu_secreto_jwt
-   - SMTP_HOST=sandbox.smtp.mailtrap.io
-   - SMTP_PORT=your_port
-   - SMTP_USER=your_user
-   - SMTP_PASS=your_password
-
+```js
+PORT=5000
+DATABASE_URL=mongodb://localhost:27017/uptask
+FRONTEND_URL=http://localhost:5173
+JWT_SECRET=tu_secreto_jwt
+SMTP_HOST=sandbox.smtp.mailtrap.io
+SMTP_PORT=your_port
+SMTP_USER=your_user
+SMTP_PASS=your_password
+```
 
 5. Inicia el servidor
 
-   npm run dev
+```js
+npm run dev
+```
 
 6. Ve al repositorio del frontend y sigue los pasos descritos en el redmi.
