@@ -68,9 +68,7 @@ git clone https://github.com/JuanPabloQB1990/uptask_backend.git
 cd uptask_backend
 npm install
 
-3. Crea un archivo .env con base al .env.example
-
-cp .env.example .env
+3. Crea un archivo .env 
 
 4. Ajusta tus variables de entorno:
 
@@ -88,55 +86,4 @@ SMTP_PASS=your_password
 
 npm run dev
 
----
-
-📌 Endpoints de la API
-
-La API sigue el patrón REST. A continuación se detallan los principales endpoints:
-
-🔐 Autenticación
-
-Método	Ruta	Descripción
-
-POST	/api/users/login	Iniciar sesión
-```md
-### POST /api/users/login
-
-**Request Body**
-```json
-{
-  "email": "user@email.com",
-  "password": "123456"
-}
-
-POST	/api/users/register	Crear nuevo usuario
-GET	/api/users/profile	Obtener perfil del usuario (requiere token)
-📁 Proyectos
-Método	Ruta	Descripción
-GET	/api/projects	Listar todos los proyectos del usuario
-GET	/api/projects/:id	Obtener un proyecto
-POST	/api/projects	Crear un nuevo proyecto
-PUT	/api/projects/:id	Actualizar proyecto
-DELETE	/api/projects/:id	Eliminar proyecto
-
-📌 Retorna objeto JSON con campo ok, data, etc.
-
-📌 Tareas
-Método	Ruta	Descripción
-GET	/api/tasks/:projectId	Lista tareas de un proyecto
-POST	/api/tasks	Crear tarea
-PUT	/api/tasks/:id	Actualizar tarea
-DELETE	/api/tasks/:id	Eliminar tarea
-PUT	/api/tasks/status/:id	Cambiar estado de tarea
-
-📌 Solicitudes de estado deben recibir { status: "Pendiente" | "Progreso" | ... }
-
-👥 Colaboradores
-Método	Ruta	Descripción
-GET	/api/team/:projectId	Lista miembros del equipo
-POST	/api/team/:projectId	Agregar miembro
-DELETE	/api/team/:projectId/:userId	Eliminar miembro
-📝 Notas
-Método	Ruta	Descripción
-POST	/api/notes	Crear nota para tarea
-DELETE	/api/notes/:id	Eliminar nota
+6. Ve al repositorio del frontend y sigue los pasos descritos en el redmi.
