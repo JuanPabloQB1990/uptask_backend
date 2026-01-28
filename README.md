@@ -38,7 +38,7 @@ Esta API está construida con:
 
 ⚡ Requisitos Previos
 
--- Antes de instalar, asegúrate de tener instalado:
+Antes de instalar, asegúrate de tener instalado:
 
 -- Node.js (v16+ recomendado)
 
