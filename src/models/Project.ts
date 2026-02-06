@@ -1,7 +1,7 @@
 import mongoose, { Document, PopulatedDoc, Schema } from "mongoose"
-import Task, { ITask } from "./Task"
-import { IUser } from "./User"
-import Note from "./Note"
+import Task, { ITask } from "./Task.js"
+import { IUser } from "./User.js"
+import Note from "./Note.js"
 
 export interface IProject extends Document {
     _id: string,

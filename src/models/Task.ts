@@ -54,6 +54,10 @@ export const TaskSchema : Schema = new Schema({
                 type: String,
                 enum: Object.values(taskStatus),
                 default: taskStatus.PENDING
+            },
+            updatedAt: {
+                type: Date,
+                default: Date.now // Se graba la hora automáticamente al insertarse
             }
         }
     ],
