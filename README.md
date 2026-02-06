@@ -96,3 +96,4 @@ npm run dev
 ```
 
 6. Ve al repositorio del frontend y sigue los pasos descritos en el redmi.
+   https://github.com/JuanPabloQB1990/uptask_frontend
