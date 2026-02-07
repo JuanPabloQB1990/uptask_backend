@@ -4,6 +4,8 @@
 
 Esta API forma parte de un sistema completo de gestión de tareas, conectándose con un frontend (como el de Uptask Frontend) para crear una herramienta colaborativa con actualizaciones en tiempo real y seguridad.
 
+url video de instrucciones: https://youtu.be/tAlX8gxeSsQ
+
 ---
 
 ## 🚀 ¿Qué hace esta aplicación?
