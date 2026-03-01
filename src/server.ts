@@ -7,6 +7,7 @@ import cors from "cors"
 import { corsConfig } from "./config/cors"
 import morgan from "morgan"
 import cookieParser from 'cookie-parser';
+import { checkSMTP } from "./config/nodemailer"
 
 
 dotenv.config()
@@ -19,6 +20,7 @@ console.log(process.env.FRONTEND_URL);
 const isTest = process.env.NODE_ENV === "test"
 if (!isTest) {
     connectDB()
+    
     // configuracion de cors
     server.use(cors(corsConfig))
     server.options("*", cors(corsConfig))

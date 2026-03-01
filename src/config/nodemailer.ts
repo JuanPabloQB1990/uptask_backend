@@ -22,4 +22,13 @@ const config = () => {
   };
 };
 
+export const checkSMTP = async () => {
+  try {
+    await transporter.verify();
+    console.log("SMTP listo");
+  } catch (error) {
+    console.error("Error conectando con SMTP:", error);
+  }
+};
+
 export const transporter = nodemailer.createTransport(config());
