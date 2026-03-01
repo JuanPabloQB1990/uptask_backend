@@ -15,10 +15,12 @@ dotenv.config()
 const server = express()
 console.log(process.env.NODE_ENV);
 
-if (process.env.NODE_ENV !== 'test') {
+const isTest = process.env.NODE_ENV === "test"
+if (!isTest) {
     connectDB()
     // configuracion de cors
     server.use(cors(corsConfig))
+    server.options("*", cors(corsConfig))
 }
 
 server.use(cookieParser());
