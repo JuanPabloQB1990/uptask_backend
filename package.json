@@ -2,7 +2,7 @@
   "name": "uptask-backend",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "compilerOptions": {
     "target": "ES2020",
     "module": "CommonJS",

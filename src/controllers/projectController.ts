@@ -52,7 +52,7 @@ export class ProjectController {
 
       if (
         project.manager!.toString() !== req.user.id.toString() &&
-        !project.team.some((member) => member._id.equals(req.user.id))
+        !project.team.some((member) => member._id === req.user.id)
       ) {
         const error = new Error("No tienes permisos para ver este proyecto");
         res.status(403).json({ error: error.message });
