@@ -11,7 +11,10 @@ const httpServer = http.createServer(server);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: [
+      "https://uptask-project.netlify.app",
+      "http://localhost:5173"
+    ],
     credentials: true,
     methods: ["GET", "POST"],
   },
