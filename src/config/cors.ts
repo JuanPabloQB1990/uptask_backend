@@ -5,6 +5,8 @@ const allowedOrigins = [
   "http://localhost:5173"
 ]
 
+console.log(process.env.FRONTEND_URL);
+
 export const corsConfig: CorsOptions = {
   origin: function (origin, callback) {
 
