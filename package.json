@@ -4,11 +4,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec tsx src/index.ts",
-    "build" : "tsc ",
-    "test": "jest --detectOpenHandles",
-    "dev:api": "nodemon --exec tsx src/index.ts --api"
-  },
+  "dev": "nodemon --exec tsx src/index.ts",
+  "dev:api": "nodemon --exec tsx src/index.ts --api",
+  "build": "tsc",
+  "start": "node dist/index.js",
+  "test": "jest --detectOpenHandles"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
