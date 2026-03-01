@@ -12,8 +12,7 @@ const httpServer = http.createServer(server);
 const io = new Server(httpServer, {
   cors: {
     origin: [
-      process.env.FRONTEND_URL,
-      "http://localhost:5173"
+      process.env.FRONTEND_URL
     ],
     credentials: true,
     methods: ["GET", "POST"],

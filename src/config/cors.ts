@@ -1,8 +1,7 @@
 import { CorsOptions } from "cors";
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "http://localhost:5173"
+  process.env.FRONTEND_URL
 ]
 
 export const corsConfig: CorsOptions = {
