@@ -1,7 +1,7 @@
 import { CorsOptions } from "cors";
 
 const allowedOrigins = [
-  "https://uptask-project.netlify.app",
+  process.env.FRONTEND_URL,
   "http://localhost:5173"
 ]
 

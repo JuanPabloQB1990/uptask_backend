@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import server from "./server.js";
+import server from "./server";
 import colors from "colors";
 import http from "http";
 import dotenv from "dotenv";
@@ -12,7 +12,7 @@ const httpServer = http.createServer(server);
 const io = new Server(httpServer, {
   cors: {
     origin: [
-      "https://uptask-project.netlify.app",
+      process.env.FRONTEND_URL,
       "http://localhost:5173"
     ],
     credentials: true,
@@ -86,5 +86,5 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(PORT, () => {
-  console.log(colors.blue.bold(`http://localhost:${PORT}`));
+  console.log(colors.blue.bold(`http://localhost:5000`));
 });

@@ -1,7 +1,5 @@
 import type { Request, Response } from "express";
 import Project from "../models/Project";
-import Task from "../models/Task";
-import Note from "../models/Note";
 
 export class ProjectController {
 

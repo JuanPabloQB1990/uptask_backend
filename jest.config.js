@@ -1,8 +1,8 @@
-/** @type {import('ts-jest').JestConfigWithTsJest} **/
-export default {
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+module.exports = {
   testEnvironment: "node",
   transform: {
-    "^.+.tsx?$": ["ts-jest",{}]
+    "^.+\\.tsx?$": ["ts-jest", {}]
   },
-  testTimeout: 30000, // Aumentar el tiempo de espera a 30s
+  testTimeout: 30000
 };

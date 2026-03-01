@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import colors from "colors";
 
 export const connectDB = async () => {
-    console.log(process.env.DATABASE_URL);
     
     try {
         const { connection } = await mongoose.connect(process.env.DATABASE_URL)
