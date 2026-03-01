@@ -13,6 +13,7 @@ dotenv.config()
 
 // inicializa el servidor
 const server = express()
+console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV !== 'test') {
     connectDB()
