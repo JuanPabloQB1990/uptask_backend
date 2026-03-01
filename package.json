@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec tsx src/index.ts",
+    "build" : "tsc ",
     "test": "jest --detectOpenHandles",
     "dev:api": "nodemon --exec tsx src/index.ts --api"
   },
