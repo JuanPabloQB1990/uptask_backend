@@ -11,9 +11,7 @@ const httpServer = http.createServer(server);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: [
-      process.env.FRONTEND_URL
-    ],
+    origin: [process.env.FRONTEND_URL],
     credentials: true,
     methods: ["GET", "POST"],
   },
@@ -84,15 +82,7 @@ io.on("connection", (socket) => {
   });
 });
 
-async function start() {
-  try {
-    httpServer.listen(PORT, () => {
-      console.log(colors.blue.bold(`http://localhost:5000`));
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-start()
+httpServer.listen(PORT, () => {
+  console.log(colors.blue.bold(`http://localhost:5000`));
+});
 

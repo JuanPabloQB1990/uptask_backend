@@ -12,8 +12,6 @@ dotenv.config()
 
 // inicializa el servidor
 const server = express()
-console.log(process.env.NODE_ENV);
-console.log(process.env.FRONTEND_URL);
 
 const isTest = process.env.NODE_ENV === "test"
 if (!isTest) {

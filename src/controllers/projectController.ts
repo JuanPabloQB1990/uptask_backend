@@ -2,7 +2,6 @@ import type { Request, Response } from "express";
 import Project from "../models/Project";
 
 export class ProjectController {
-
   static createProject = async (req: Request, res: Response) => {
     const project = new Project(req.body);
     project.manager = req.user.id;
@@ -50,7 +49,9 @@ export class ProjectController {
 
       if (
         project.manager!.toString() !== req.user.id.toString() &&
-        !project.team.some((member) => member._id === req.user.id)
+        !project.team.some(
+          (member) => member._id.toString() === req.user.id.toString(),
+        )
       ) {
         const error = new Error("No tienes permisos para ver este proyecto");
         res.status(403).json({ error: error.message });
@@ -72,7 +73,7 @@ export class ProjectController {
       req.project.projectName = req.body.projectName;
       req.project.description = req.body.description;
       const updatedProject = await req.project.save();
-      
+
       res.json({
         message: "Proyecto Actualizado",
         projectUpdated: updatedProject,
