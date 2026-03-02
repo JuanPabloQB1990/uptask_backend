@@ -7,8 +7,6 @@ import cors from "cors"
 import { corsConfig } from "./config/cors"
 import morgan from "morgan"
 import cookieParser from 'cookie-parser';
-import { checkSMTP } from "./config/nodemailer"
-
 
 dotenv.config()
 

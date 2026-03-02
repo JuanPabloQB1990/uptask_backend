@@ -3,7 +3,6 @@ import server from "./server";
 import colors from "colors";
 import http from "http";
 import dotenv from "dotenv";
-//import { checkSMTP } from "./config/nodemailer";
 dotenv.config();
 
 const PORT = process.env.PORT || 4000;
@@ -87,7 +86,6 @@ io.on("connection", (socket) => {
 
 async function start() {
   try {
-    //await checkSMTP();
     httpServer.listen(PORT, () => {
       console.log(colors.blue.bold(`http://localhost:5000`));
     });
