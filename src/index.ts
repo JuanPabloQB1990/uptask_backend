@@ -23,21 +23,28 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new task", (task) => {
+    console.log("agregué nueva tarea");
+    
     const project = task.project;
     socket.to(project).emit("added task", task);
   });
 
   socket.on("delete task", (task) => {
+    console.log("eliminé una tarea");
     const project = task.project;
     socket.to(project).emit("deleted task", task);
   });
 
   socket.on("edit task", (task) => {
+    console.log("edité una tarea");
+
     const project = task.project;
     socket.to(project).emit("edited task", task);
   });
 
   socket.on("update status task", (task) => {
+    console.log("edité estado de una tarea");
+
     const project = task.project;
     socket.to(project).emit("updated status task", task);
   });
@@ -47,10 +54,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new note", (task) => {
+    console.log("añadí una nota");
     socket.to(task).emit("added note", task);
   });
 
   socket.on("delete note", (task) => {
+    console.log("eliminé una nota");
     socket.to(task).emit("deleted note", task);
   });
 
@@ -59,8 +68,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("edit project", ({ projectId, project }) => {
-    //socket.to(projectId).emit("edited project", project);
-
+    console.log("edité un proyecto");
+    
     const usersToNotify = [
       project.manager,
       ...project.team, // colaboradores
@@ -68,16 +77,18 @@ io.on("connection", (socket) => {
 
     usersToNotify.forEach((userId) => {
       console.log(userId.toString());
-
       socket.to(userId.toString()).emit("edited project", projectId);
     });
   });
 
-  socket.on("new member", ({ userId, project }) => {
+  socket.on("new member", ({ userId }) => {
+    console.log("añadí nuevo miembro");
+    
     socket.to(userId).emit("added member", userId);
   });
 
   socket.on("delete member", (userId) => {
+    console.log("eliminé un miembro ", userId);
     socket.to(userId).emit("deleted member", userId);
   });
 });
