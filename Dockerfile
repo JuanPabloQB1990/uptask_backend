@@ -11,6 +11,9 @@ RUN npm install
 # Copiar el resto del proyecto
 COPY . .
 
+# compilar typescript
+RUN npm run build
+
 EXPOSE 5000
 
-CMD ["npm","run","start"]
+CMD ["npm","start"]
