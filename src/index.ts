@@ -5,7 +5,7 @@ import http from "http";
 import dotenv from "dotenv";
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+const PORT = Number(process.env.PORT) || 4000;
 
 const httpServer = http.createServer(server);
 
@@ -93,7 +93,7 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(PORT, () => {
-  console.log(colors.blue.bold(`http://localhost:5000`));
+httpServer.listen(PORT, "0.0.0.0", () => {
+  console.log(colors.blue.bold(`http://localhost:${PORT}`));
 });
 
